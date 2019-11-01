@@ -1,0 +1,40 @@
+SELECT 
+    IF(EXISTS( SELECT 
+                SCHEMA_NAME
+            FROM
+                INFORMATION_SCHEMA.SCHEMATA
+            WHERE
+                SCHEMA_NAME = '250781723assign2db'),
+        'Correct DB being used',
+        'Incorrect DB')  as exist;
+
+USE 250781723assign2db;
+-- Q1
+SELECT lastName FROM patient; 
+-- Q2
+SELECT DISTINCT lastName FROM patient;
+-- Q3
+SELECT * FROM doctor ORDER BY lastName; 
+-- Q4
+SELECT hospitalName, hospitalCode FROM hospital WHERE beds>'1500';
+-- Q5
+SELECT D.firstName, D.lastName FROM doctor D INNER JOIN hospital H ON D.worksinhoscode = H.hospitalCode WHERE H.hospitalName = 'St.Joseph';
+-- Q6
+SELECT firstName, lastName FROM patient WHERE lastName like 'G%'; 
+-- Q7
+SELECT P.firstName, P.lastName FROM doctor D INNER JOIN treats T ON D.licenseNum = T.licenseNum INNER JOIN patient P ON T.ohip = P.ohip WHERE D.lastName = 'Clooney';
+-- Q8
+SELECT H.hospitalName, H.city, D.lastName FROM hospital H INNER JOIN doctor D ON H.headlicense = D.licenseNum;
+-- Q9
+SELECT SUM(beds) AS 'Total Number of Beds' FROM hospital; 
+-- Q10 
+SELECT P.firstName AS 'patient first name', D.firstName AS 'doctor first name' FROM hospital H INNER JOIN doctor D ON H.headlicense = D.licenseNum INNER JOIN treats T ON D.licenseNum = T.licenseNum INNER JOIN patient P ON T.ohip = P.ohip;
+-- Q11
+SELECT DISTINCT D.firstName, D.lastName FROM hospital H INNER JOIN doctor D WHERE H.HospitalName = 'Victoria' AND D.specialty = 'Surgeon'; 
+-- Q11 (second way of doing it)
+-- SELECT DISTINCT firstName, lastName FROM doctor,hospital WHERE specialty = 'Surgeon' AND hospitalName = 'Victoria';
+-- Q12
+SELECT firstName FROM doctor WHERE licenseNum NOT in (SELECT licenseNum FROM treats);
+-- Q13
+SELECT D.firstName, D.lastName FROM treats T INNER JOIN doctor D ON T.licenseNum = D.licenseNum GROUP BY D.licenseNum HAVING COUNT(T.licenseNum)>1;
+
