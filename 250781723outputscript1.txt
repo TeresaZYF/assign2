@@ -1,0 +1,103 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SHOW DATABASES
+--------------
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| 250781723assign2db |
+| mysql              |
+| performance_schema |
+| vetoffice          |
++--------------------+
+5 rows in set (0.00 sec)
+
+--------------
+DROP DATABASE IF EXISTS 250781723assign2db
+--------------
+
+Query OK, 2 rows affected (0.26 sec)
+
+--------------
+CREATE DATABASE 250781723assign2db
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+SHOW TABLES
+--------------
+
+Empty set (0.00 sec)
+
+--------------
+CREATE TABLE doctor (licenseNum VARCHAR (4), firstName VARCHAR(20), lastName VARCHAR(20), specialty VARCHAR(30), licenseDate VARCHAR (15), PRIMARY KEY (licenseNum))
+--------------
+
+Query OK, 0 rows affected (0.06 sec)
+
+--------------
+CREATE TABLE hospital (hospitalCode CHAR(3), hospitalName VARCHAR (20), city VARCHAR (20), province VARCHAR(2), beds int, headlicense VARCHAR (4), headDate VARCHAR (20), FOREIGN KEY (headlicense) REFERENCES doctor (licenseNum), PRIMARY KEY (hospitalCode))
+--------------
+
+Query OK, 0 rows affected (0.06 sec)
+
+--------------
+CREATE TABLE patient (ohip int, firstName VARCHAR (20), lastName VARCHAR (20), PRIMARY KEY (ohip))
+--------------
+
+Query OK, 0 rows affected (0.05 sec)
+
+--------------
+CREATE TABLE treats (ohip int, licenseNum VARCHAR(4), FOREIGN KEY (licenseNum) REFERENCES doctor (licenseNum), FOREIGN KEY (ohip) REFERENCES patient (ohip))
+--------------
+
+Query OK, 0 rows affected (0.06 sec)
+
+--------------
+SHOW TABLES
+--------------
+
++------------------------------+
+| Tables_in_250781723assign2db |
++------------------------------+
+| doctor                       |
+| hospital                     |
+| patient                      |
+| treats                       |
++------------------------------+
+4 rows in set (0.00 sec)
+
+Bye

@@ -1,0 +1,68 @@
+SELECT 
+    IF(EXISTS( SELECT 
+                SCHEMA_NAME
+            FROM
+                INFORMATION_SCHEMA.SCHEMATA
+            WHERE
+                SCHEMA_NAME = '250781723assign2db'),
+        'Correct DB being used',
+        'Incorrect DB')  as exist;
+USE 250781723assign2db;
+LOAD DATA LOCAL INFILE 'loaddatafall2019.txt' INTO TABLE patient FIELDS TERMINATED BY ',';
+
+SELECT * FROM patient;
+
+INSERT INTO patient VALUES ('123456789','Teresa','Zhu');
+
+INSERT INTO doctor VALUES ('RD34','Bernie','Kavorikian','Urologist','Sept 9,1980');
+INSERT INTO doctor VALUES ('GD56','Joey','Shabado','Podiatrist','Jun 24, 1960');
+INSERT INTO doctor VALUES ('HT45','Ross','Clooney','Surgeon','Jun 20, 1987');
+INSERT INTO doctor VALUES ('YT67','Ben','Spock','Pediatrician','Feb 20, 1955');
+INSERT INTO doctor VALUES ('JK78','Mandy','Webster','Surgeon','Aug 8, 1990');
+INSERT INTO doctor VALUES ('SE66','Colleen','Aziz','Surgeon','Aug 24, 1989');
+INSERT INTO doctor VALUES ('AA11','Kevin','Armstrong','Anesthesiologist','Oct 11, 1980');
+
+INSERT INTO hospital VALUES ('BBC','St.Joseph','London','On',1000,'GD56','Sept 10, 1999');
+INSERT INTO hospital VALUES ('ABC','Victoria','London','On',1600,'SE66','Dec 5, 1994');
+INSERT INTO hospital VALUES ('DDE','Victoria','Victoria','Bc',1200,'YT67','Dec 7, 1997');
+
+INSERT INTO treats VALUES ('110112113','GD56');
+INSERT INTO treats VALUES ('444555666','HT45');
+INSERT INTO treats VALUES ('444555666','JK78');
+INSERT INTO treats VALUES ('111222333','SE66');
+INSERT INTO treats VALUES ('111222333','YT67');
+INSERT INTO treats VALUES ('111222333','GD56');
+INSERT INTO treats VALUES ('333444555','GD56');
+INSERT INTO treats VALUES ('667766777','YT67');
+INSERT INTO treats VALUES ('667766777','JK78');
+INSERT INTO treats VALUES ('667766777','GD56');
+INSERT INTO treats VALUES ('111222111','YT67');
+INSERT INTO treats VALUES ('123456789','RD34');
+
+SELECT * FROM doctor;
+SELECT * FROM hospital; 
+SELECT * FROM patient; 
+SELECT * FROM treats; 
+
+ALTER TABLE doctor ADD worksinhoscode CHAR (3), ADD CONSTRAINT FOREIGN KEY (worksinhoscode) REFERENCES hospital (hospitalCode);
+UPDATE doctor SET worksinhoscode = 'BBC' WHERE licenseNum= 'RD34'; 
+UPDATE doctor SET worksinhoscode = 'BBC' WHERE licenseNum= 'GD56'; 
+UPDATE doctor SET worksinhoscode = 'DDE' WHERE licenseNum= 'HT45'; 
+UPDATE doctor SET worksinhoscode = 'DDE' WHERE licenseNum= 'YT67'; 
+UPDATE doctor SET worksinhoscode = 'BBC' WHERE licenseNum= 'JK78'; 
+UPDATE doctor SET worksinhoscode = 'ABC' WHERE licenseNum= 'SE66'; 
+UPDATE doctor SET worksinhoscode = 'ABC' WHERE licenseNum= 'AA11'; 
+SELECT * FROM doctor;
+
+SELECT * FROM patient; 
+UPDATE patient SET lastName='Brown' WHERE ohip=111222111;
+SELECT * FROM patient; 
+
+SELECT * FROM treats; 
+UPDATE treats SET licenseNum = (SELECT licenseNum FROM doctor WHERE lastName = "Clooney") WHERE licenseNum = (SELECT licenseNum FROM doctor WHERE lastName = "Spock");
+SELECT * FROM treats; 
+
+SELECT * FROM doctor;
+SELECT * FROM hospital; 
+SELECT * FROM patient; 
+SELECT * FROM treats; 
