@@ -1,0 +1,163 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SELECT 
+    IF(EXISTS( SELECT 
+                SCHEMA_NAME
+            FROM
+                INFORMATION_SCHEMA.SCHEMATA
+            WHERE
+                SCHEMA_NAME = '250781723assign2db'),
+        'Correct DB being used',
+        'Incorrect DB')  as exist
+--------------
+
++-----------------------+
+| exist                 |
++-----------------------+
+| Correct DB being used |
++-----------------------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT * FROM doctor
+--------------
+
++------------+-----------+------------+------------------+-------------+----------------+
+| licenseNum | firstName | lastName   | specialty        | licenseDate | worksinhoscode |
++------------+-----------+------------+------------------+-------------+----------------+
+| AA11       | Kevin     | Armstrong  | Anesthesiologist | 1980-10-11  | ABC            |
+| GD56       | Joey      | Shabado    | Podiatrist       | 1960-06-24  | BBC            |
+| HT45       | Ross      | Clooney    | Surgeon          | 1987-06-20  | DDE            |
+| JK78       | Mandy     | Webster    | Surgeon          | 1990-08-08  | BBC            |
+| RD34       | Bernie    | Kavorikian | Urologist        | 1980-09-09  | BBC            |
+| SE66       | Colleen   | Aziz       | Surgeon          | 1989-08-24  | ABC            |
+| YT67       | Ben       | Spock      | Pediatrician     | 1995-02-20  | DDE            |
++------------+-----------+------------+------------------+-------------+----------------+
+7 rows in set (0.00 sec)
+
+ERROR 1451 (23000) at line 14: Cannot delete or update a parent row: a foreign key constraint fails (`250781723assign2db`.`hospital`, CONSTRAINT `hospital_ibfk_1` FOREIGN KEY (`headlicense`) REFERENCES `doctor` (`licenseNum`))
+--------------
+DELETE FROM doctor WHERE licenseDate < '1965-01-01'
+--------------
+
+--------------
+SELECT * FROM doctor
+--------------
+
++------------+-----------+------------+------------------+-------------+----------------+
+| licenseNum | firstName | lastName   | specialty        | licenseDate | worksinhoscode |
++------------+-----------+------------+------------------+-------------+----------------+
+| AA11       | Kevin     | Armstrong  | Anesthesiologist | 1980-10-11  | ABC            |
+| GD56       | Joey      | Shabado    | Podiatrist       | 1960-06-24  | BBC            |
+| HT45       | Ross      | Clooney    | Surgeon          | 1987-06-20  | DDE            |
+| JK78       | Mandy     | Webster    | Surgeon          | 1990-08-08  | BBC            |
+| RD34       | Bernie    | Kavorikian | Urologist        | 1980-09-09  | BBC            |
+| SE66       | Colleen   | Aziz       | Surgeon          | 1989-08-24  | ABC            |
+| YT67       | Ben       | Spock      | Pediatrician     | 1995-02-20  | DDE            |
++------------+-----------+------------+------------------+-------------+----------------+
+7 rows in set (0.00 sec)
+
+ERROR 1050 (42S01) at line 18: Table 'cv' already exists
+--------------
+CREATE VIEW cv AS SELECT DISTINCT patient.firstName, patient.lastName AS 'patient last name', doctor.lastName AS 'doctor last name', hospital.hospitalName FROM patient, doctor, hospital, treats WHERE patient.ohip = treats.ohip AND hospital.headlicense = treats.licenseNum AND doctor.licenseNum = treats.licenseNum AND headDate < '1995-12-31'
+--------------
+
+--------------
+SELECT * FROM cv
+--------------
+
++-----------+-------------------+------------------+--------------+
+| firstName | patient last name | doctor last name | hospitalName |
++-----------+-------------------+------------------+--------------+
+| Jon       | Green             | Aziz             | Victoria     |
+| Bill      | Gellar            | Shabado          | St.Joseph    |
+| Jon       | Green             | Shabado          | St.Joseph    |
+| Colleen   | Gellar            | Shabado          | St.Joseph    |
+| Scotty    | Bing              | Shabado          | St.Joseph    |
++-----------+-------------------+------------------+--------------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM doctor
+--------------
+
++------------+-----------+------------+------------------+-------------+----------------+
+| licenseNum | firstName | lastName   | specialty        | licenseDate | worksinhoscode |
++------------+-----------+------------+------------------+-------------+----------------+
+| AA11       | Kevin     | Armstrong  | Anesthesiologist | 1980-10-11  | ABC            |
+| GD56       | Joey      | Shabado    | Podiatrist       | 1960-06-24  | BBC            |
+| HT45       | Ross      | Clooney    | Surgeon          | 1987-06-20  | DDE            |
+| JK78       | Mandy     | Webster    | Surgeon          | 1990-08-08  | BBC            |
+| RD34       | Bernie    | Kavorikian | Urologist        | 1980-09-09  | BBC            |
+| SE66       | Colleen   | Aziz       | Surgeon          | 1989-08-24  | ABC            |
+| YT67       | Ben       | Spock      | Pediatrician     | 1995-02-20  | DDE            |
++------------+-----------+------------+------------------+-------------+----------------+
+7 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM treats
+--------------
+
++-----------+------------+
+| ohip      | licenseNum |
++-----------+------------+
+| 110112113 | GD56       |
+| 444555666 | HT45       |
+| 444555666 | JK78       |
+| 111222333 | SE66       |
+| 111222333 | HT45       |
+| 111222333 | GD56       |
+| 333444555 | GD56       |
+| 667766777 | HT45       |
+| 667766777 | JK78       |
+| 667766777 | GD56       |
+| 111222111 | HT45       |
+| 123456789 | RD34       |
++-----------+------------+
+12 rows in set (0.00 sec)
+
+ERROR 1451 (23000) at line 25: Cannot delete or update a parent row: a foreign key constraint fails (`250781723assign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`licenseNum`) REFERENCES `doctor` (`licenseNum`))
+--------------
+DELETE FROM doctor WHERE lastName = 'Clooney'
+--------------
+
+--------------
+SELECT * FROM doctor
+--------------
+
++------------+-----------+------------+------------------+-------------+----------------+
+| licenseNum | firstName | lastName   | specialty        | licenseDate | worksinhoscode |
++------------+-----------+------------+------------------+-------------+----------------+
+| AA11       | Kevin     | Armstrong  | Anesthesiologist | 1980-10-11  | ABC            |
+| GD56       | Joey      | Shabado    | Podiatrist       | 1960-06-24  | BBC            |
+| HT45       | Ross      | Clooney    | Surgeon          | 1987-06-20  | DDE            |
+| JK78       | Mandy     | Webster    | Surgeon          | 1990-08-08  | BBC            |
+| RD34       | Bernie    | Kavorikian | Urologist        | 1980-09-09  | BBC            |
+| SE66       | Colleen   | Aziz       | Surgeon          | 1989-08-24  | ABC            |
+| YT67       | Ben       | Spock      | Pediatrician     | 1995-02-20  | DDE            |
++------------+-----------+------------+------------------+-------------+----------------+
+7 rows in set (0.00 sec)
+
+ERROR 1451 (23000) at line 28: Cannot delete or update a parent row: a foreign key constraint fails (`250781723assign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`licenseNum`) REFERENCES `doctor` (`licenseNum`))
+--------------
+DELETE FROM doctor WHERE specialty = 'Surgeon'
+--------------
+
+--------------
+SELECT * FROM doctor
+--------------
+
++------------+-----------+------------+------------------+-------------+----------------+
+| licenseNum | firstName | lastName   | specialty        | licenseDate | worksinhoscode |
++------------+-----------+------------+------------------+-------------+----------------+
+| AA11       | Kevin     | Armstrong  | Anesthesiologist | 1980-10-11  | ABC            |
+| GD56       | Joey      | Shabado    | Podiatrist       | 1960-06-24  | BBC            |
+| HT45       | Ross      | Clooney    | Surgeon          | 1987-06-20  | DDE            |
+| JK78       | Mandy     | Webster    | Surgeon          | 1990-08-08  | BBC            |
+| RD34       | Bernie    | Kavorikian | Urologist        | 1980-09-09  | BBC            |
+| SE66       | Colleen   | Aziz       | Surgeon          | 1989-08-24  | ABC            |
+| YT67       | Ben       | Spock      | Pediatrician     | 1995-02-20  | DDE            |
++------------+-----------+------------+------------------+-------------+----------------+
+7 rows in set (0.00 sec)
+
+Bye

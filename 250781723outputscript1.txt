@@ -18,7 +18,7 @@ SHOW DATABASES
 DROP DATABASE IF EXISTS 250781723assign2db
 --------------
 
-Query OK, 2 rows affected (0.26 sec)
+Query OK, 6 rows affected (0.21 sec)
 
 --------------
 CREATE DATABASE 250781723assign2db
@@ -54,7 +54,7 @@ Query OK, 0 rows affected (0.00 sec)
 FLUSH PRIVILEGES
 --------------
 
-Query OK, 0 rows affected (0.01 sec)
+Query OK, 0 rows affected (0.00 sec)
 
 --------------
 SHOW TABLES
@@ -63,13 +63,13 @@ SHOW TABLES
 Empty set (0.00 sec)
 
 --------------
-CREATE TABLE doctor (licenseNum VARCHAR (4), firstName VARCHAR(20), lastName VARCHAR(20), specialty VARCHAR(30), licenseDate VARCHAR (15), PRIMARY KEY (licenseNum))
+CREATE TABLE doctor (licenseNum VARCHAR (4), firstName VARCHAR(20), lastName VARCHAR(20), specialty VARCHAR(30), licenseDate DATE, PRIMARY KEY (licenseNum))
 --------------
 
-Query OK, 0 rows affected (0.06 sec)
+Query OK, 0 rows affected (0.05 sec)
 
 --------------
-CREATE TABLE hospital (hospitalCode CHAR(3), hospitalName VARCHAR (20), city VARCHAR (20), province VARCHAR(2), beds int, headlicense VARCHAR (4), headDate VARCHAR (20), FOREIGN KEY (headlicense) REFERENCES doctor (licenseNum), PRIMARY KEY (hospitalCode))
+CREATE TABLE hospital (hospitalCode CHAR(3), hospitalName VARCHAR (20), city VARCHAR (20), province VARCHAR(2), beds int, headlicense VARCHAR (4), headDate DATE, FOREIGN KEY (headlicense) REFERENCES doctor (licenseNum), PRIMARY KEY (hospitalCode))
 --------------
 
 Query OK, 0 rows affected (0.06 sec)
@@ -78,13 +78,13 @@ Query OK, 0 rows affected (0.06 sec)
 CREATE TABLE patient (ohip int, firstName VARCHAR (20), lastName VARCHAR (20), PRIMARY KEY (ohip))
 --------------
 
-Query OK, 0 rows affected (0.05 sec)
+Query OK, 0 rows affected (0.04 sec)
 
 --------------
 CREATE TABLE treats (ohip int, licenseNum VARCHAR(4), FOREIGN KEY (licenseNum) REFERENCES doctor (licenseNum), FOREIGN KEY (ohip) REFERENCES patient (ohip))
 --------------
 
-Query OK, 0 rows affected (0.06 sec)
+Query OK, 0 rows affected (0.07 sec)
 
 --------------
 SHOW TABLES

@@ -9,9 +9,9 @@ GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost';
 FLUSH PRIVILEGES;
 SHOW TABLES;
 
-CREATE TABLE doctor (licenseNum VARCHAR (4), firstName VARCHAR(20), lastName VARCHAR(20), specialty VARCHAR(30), licenseDate VARCHAR (15), PRIMARY KEY (licenseNum));
+CREATE TABLE doctor (licenseNum VARCHAR (4), firstName VARCHAR(20), lastName VARCHAR(20), specialty VARCHAR(30), licenseDate DATE, PRIMARY KEY (licenseNum));
 
-CREATE TABLE hospital (hospitalCode CHAR(3), hospitalName VARCHAR (20), city VARCHAR (20), province VARCHAR(2), beds int, headlicense VARCHAR (4), headDate VARCHAR (20), FOREIGN KEY (headlicense) REFERENCES doctor (licenseNum), PRIMARY KEY (hospitalCode));
+CREATE TABLE hospital (hospitalCode CHAR(3), hospitalName VARCHAR (20), city VARCHAR (20), province VARCHAR(2), beds int, headlicense VARCHAR (4), headDate DATE, FOREIGN KEY (headlicense) REFERENCES doctor (licenseNum), PRIMARY KEY (hospitalCode));
 
 CREATE TABLE patient (ohip int, firstName VARCHAR (20), lastName VARCHAR (20), PRIMARY KEY (ohip)); 
 

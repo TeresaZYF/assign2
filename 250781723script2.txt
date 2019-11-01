@@ -14,17 +14,17 @@ SELECT * FROM patient;
 
 INSERT INTO patient VALUES ('123456789','Teresa','Zhu');
 
-INSERT INTO doctor VALUES ('RD34','Bernie','Kavorikian','Urologist','Sept 9,1980');
-INSERT INTO doctor VALUES ('GD56','Joey','Shabado','Podiatrist','Jun 24, 1960');
-INSERT INTO doctor VALUES ('HT45','Ross','Clooney','Surgeon','Jun 20, 1987');
-INSERT INTO doctor VALUES ('YT67','Ben','Spock','Pediatrician','Feb 20, 1955');
-INSERT INTO doctor VALUES ('JK78','Mandy','Webster','Surgeon','Aug 8, 1990');
-INSERT INTO doctor VALUES ('SE66','Colleen','Aziz','Surgeon','Aug 24, 1989');
-INSERT INTO doctor VALUES ('AA11','Kevin','Armstrong','Anesthesiologist','Oct 11, 1980');
+INSERT INTO doctor VALUES ('RD34','Bernie','Kavorikian','Urologist','1980-09-09');
+INSERT INTO doctor VALUES ('GD56','Joey','Shabado','Podiatrist','1960-06-24');
+INSERT INTO doctor VALUES ('HT45','Ross','Clooney','Surgeon','1987-06-20');
+INSERT INTO doctor VALUES ('YT67','Ben','Spock','Pediatrician','1995-02-20');
+INSERT INTO doctor VALUES ('JK78','Mandy','Webster','Surgeon','1990-08-08');
+INSERT INTO doctor VALUES ('SE66','Colleen','Aziz','Surgeon','1989-08-24');
+INSERT INTO doctor VALUES ('AA11','Kevin','Armstrong','Anesthesiologist','1980-10-11');
 
-INSERT INTO hospital VALUES ('BBC','St.Joseph','London','On',1000,'GD56','Sept 10, 1999');
-INSERT INTO hospital VALUES ('ABC','Victoria','London','On',1600,'SE66','Dec 5, 1994');
-INSERT INTO hospital VALUES ('DDE','Victoria','Victoria','Bc',1200,'YT67','Dec 7, 1997');
+INSERT INTO hospital VALUES ('BBC','St.Joseph','London','On',1000,'GD56','1990-09-10');
+INSERT INTO hospital VALUES ('ABC','Victoria','London','On',1600,'SE66','1994-12-05');
+INSERT INTO hospital VALUES ('DDE','Victoria','Victoria','Bc',1200,'YT67','1997-12-07');
 
 INSERT INTO treats VALUES ('110112113','GD56');
 INSERT INTO treats VALUES ('444555666','HT45');

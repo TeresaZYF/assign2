@@ -1,0 +1,33 @@
+SELECT 
+    IF(EXISTS( SELECT 
+                SCHEMA_NAME
+            FROM
+                INFORMATION_SCHEMA.SCHEMATA
+            WHERE
+                SCHEMA_NAME = '250781723assign2db'),
+        'Correct DB being used',
+        'Incorrect DB')  as exist;
+
+USE 250781723assign2db;
+
+SELECT * FROM doctor;
+DELETE FROM doctor WHERE licenseDate < '1965-01-01';
+SELECT * FROM doctor;
+-- Deletion for specialty of Surgeon didn't work because of the presence of the foreign key. So we can't delete the table because it is referenced in other tables. 
+
+CREATE VIEW cv AS SELECT DISTINCT patient.firstName, patient.lastName AS 'patient last name', doctor.lastName AS 'doctor last name', hospital.hospitalName FROM patient, doctor, hospital, treats WHERE patient.ohip = treats.ohip AND hospital.headlicense = treats.licenseNum AND doctor.licenseNum = treats.licenseNum AND headDate < '1995-12-31'; 
+
+SELECT * FROM cv; 
+
+SELECT * FROM doctor;
+SELECT * FROM treats; 
+
+DELETE FROM doctor WHERE lastName = 'Clooney';
+SELECT * FROM doctor;
+
+DELETE FROM doctor WHERE specialty = 'Surgeon';
+SELECT * FROM doctor; 
+
+-- Deletion for last name Clooney and specialty of Surgeon didn't work because of the presence of the foreign key. So we can't delete the table because it is referenced in other tables such as treats. 
+
+

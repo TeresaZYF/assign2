@@ -54,17 +54,17 @@ SELECT DISTINCT lastName FROM patient
 SELECT * FROM doctor ORDER BY lastName
 --------------
 
-+------------+-----------+------------+------------------+--------------+----------------+
-| licenseNum | firstName | lastName   | specialty        | licenseDate  | worksinhoscode |
-+------------+-----------+------------+------------------+--------------+----------------+
-| AA11       | Kevin     | Armstrong  | Anesthesiologist | Oct 11, 1980 | ABC            |
-| SE66       | Colleen   | Aziz       | Surgeon          | Aug 24, 1989 | ABC            |
-| HT45       | Ross      | Clooney    | Surgeon          | Jun 20, 1987 | DDE            |
-| RD34       | Bernie    | Kavorikian | Urologist        | Sept 9,1980  | BBC            |
-| GD56       | Joey      | Shabado    | Podiatrist       | Jun 24, 1960 | BBC            |
-| YT67       | Ben       | Spock      | Pediatrician     | Feb 20, 1955 | DDE            |
-| JK78       | Mandy     | Webster    | Surgeon          | Aug 8, 1990  | BBC            |
-+------------+-----------+------------+------------------+--------------+----------------+
++------------+-----------+------------+------------------+-------------+----------------+
+| licenseNum | firstName | lastName   | specialty        | licenseDate | worksinhoscode |
++------------+-----------+------------+------------------+-------------+----------------+
+| AA11       | Kevin     | Armstrong  | Anesthesiologist | 1980-10-11  | ABC            |
+| SE66       | Colleen   | Aziz       | Surgeon          | 1989-08-24  | ABC            |
+| HT45       | Ross      | Clooney    | Surgeon          | 1987-06-20  | DDE            |
+| RD34       | Bernie    | Kavorikian | Urologist        | 1980-09-09  | BBC            |
+| GD56       | Joey      | Shabado    | Podiatrist       | 1960-06-24  | BBC            |
+| YT67       | Ben       | Spock      | Pediatrician     | 1995-02-20  | DDE            |
+| JK78       | Mandy     | Webster    | Surgeon          | 1990-08-08  | BBC            |
++------------+-----------+------------+------------------+-------------+----------------+
 7 rows in set (0.00 sec)
 
 --------------
@@ -103,7 +103,7 @@ SELECT firstName, lastName FROM patient WHERE lastName like 'G%'
 | Colleen   | Gellar   |
 | Sean      | Gellar   |
 +-----------+----------+
-4 rows in set (0.00 sec)
+4 rows in set (0.01 sec)
 
 --------------
 SELECT P.firstName, P.lastName FROM doctor D INNER JOIN treats T ON D.licenseNum = T.licenseNum INNER JOIN patient P ON T.ohip = P.ohip WHERE D.lastName = 'Clooney'

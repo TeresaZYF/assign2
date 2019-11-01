@@ -225,3 +225,79 @@ ls
 assignment2
 cd assignment2
 exit
+mv 250781723outputscript1.txt /assignment2/
+pwd 
+cd ~
+git pull origin master
+git add .
+cd ~/Documents/firstproject
+ls
+cd /var/www/html/testing
+git clone https://github.com/TeresaZYF/firstcs3319.git
+cd firstcs3319
+git pull origin master
+ls
+git add .
+cd
+git remote add origin https://github.com/TeresaZYF/assign2.git
+git push -u origin master
+git init
+git remote add origin https://github.com/TeresaZYF/assign2.git
+git push -u origin master
+echo "# assign2" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/TeresaZYF/assign2.git
+git push -u origin master
+git add .
+git push -u origin master
+git add 250781723outputscript1.txt
+git push -u origin master
+git add 250781723outputscript1.txt
+git commit –m “putting my first file in local repo”
+git remote add origin https://github.com/TeresaZYF/assign2.git
+git add .
+git commit –m “putting my first file in local repo”
+cd ~/assignment2
+git remote add origin https://github.com/TeresaZYF/assign2.git
+echo "# A2" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/TeresaZYF/A2.git
+git push -u origin master
+nano haha.txt
+ls
+git add .
+git commit -m “puush file from my vm to my local machine”
+git push origin master
+cd
+git add .
+git commit -m "push file from vm to local"
+git push origin master
+mysql -u root -p
+nano 250781723script3.txt
+sudo mysql -nvvf --verbose -pcs3319 <250781723script3.txt >250781723outputscript3.txt 2>&1
+nano 250781723outputscript3.txt
+mysql -u root -p
+nano 250781723script3.txt
+sudo mysql -nvvf --verbose -pcs3319 <250781723script3.txt >250781723outputscript3.txt 2>&1
+nano 250781723outputscript3.txt
+nano 250781723script3.txt
+sudo mysql -nvvf --verbose -pcs3319 <250781723script3.txt >250781723outputscript3.txt 2>&1
+nano 250781723outputscript3.txt
+nano 250781723script3.txt
+sudo mysql -nvvf --verbose -pcs3319 <250781723script3.txt >250781723outputscript3.txt 2>&1
+nano 250781723outputscript3.txt
+nano 250781723script3.txt
+sudo mysql -nvvf --verbose -pcs3319 <250781723script3.txt >250781723outputscript3.txt 2>&1
+nano 250781723outputscript3.txt
+nano 250781723script3.txt
+sudo mysql -nvvf --verbose -pcs3319 <250781723script3.txt >250781723outputscript3.txt 2>&1
+nano 250781723outputscript3.txt
+git add .
+git commit -m "push file from vm to local"
+git push origin master
+mysql -u root -p
+mysql -u root -p
